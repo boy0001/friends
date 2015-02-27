@@ -1,0 +1,7 @@
+name: Friends
+main: me.tkb7.friends.Main
+version: 0.0.1
+authors: [Empire92, Awesomo]
+commands:
+   friend:
+      description: friends command;
