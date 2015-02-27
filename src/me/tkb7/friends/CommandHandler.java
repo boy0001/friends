@@ -6,7 +6,13 @@ import org.bukkit.command.CommandSender;
 public class CommandHandler {
 
     public static boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        String command = label.toLowerCase();
+        if (args.length == 0) {
+            // No sub command provided
+            return false;
+        }
+        
+        
+        String command = args[0].toLowerCase();
         
         switch (command) {
             case "add": {
