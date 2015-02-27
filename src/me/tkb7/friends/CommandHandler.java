@@ -22,6 +22,13 @@ public class CommandHandler {
             	if (args.length == 2) {
             		String friend = args[1];
             		UUID uuid = FriendUtil.getUUID(friend);
+            		if (uuid == null) {
+            		    p.sendMessage(ChatColor.RED + "Player not found");
+            		}
+            		else {
+            		    FriendUtil.addFriend(p.getUniqueId(), uuid);
+            		    p.sendMessage(ChatColor.GREEN + "YAY");
+            		}
             	} else {
             		p.sendMessage(ChatColor.RED + "Incorrect Syntax use /Friends Help for help");
             	}
