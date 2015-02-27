@@ -12,14 +12,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 public class FriendUtil {
-    private HashMap<UUID, HashSet<UUID>> friendMap = new HashMap<>();
+    private static HashMap<UUID, HashSet<UUID>> friendMap = new HashMap<>();
     
     public static File friendFile;
     public static YamlConfiguration friendYml;
     
-    public UUID getUUID(String name) {
+    public static UUID getUUID(String name) {
         OfflinePlayer op = Bukkit.getOfflinePlayer(name);
         if (op.hasPlayedBefore()) {
             return op.getUniqueId();
@@ -27,7 +28,7 @@ public class FriendUtil {
         return null;
     }
     
-    public String getName(UUID uuid) {
+    public static String getName(UUID uuid) {
         OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
         if (op.hasPlayedBefore()) {
             return op.getName();
@@ -35,7 +36,19 @@ public class FriendUtil {
         return null;
     }
     
-    public void addFriend(UUID user, UUID friend) {
+    public static Set<UUID> getFriends(Player player) {
+        return getFriends(player.getUniqueId());
+    }
+    
+    public static Set<UUID> getFriends(UUID uuid) {
+        HashSet<UUID> friends = friendMap.get(uuid);
+        if (friends == null) {
+            return new HashSet<UUID>();
+        }
+        return friends;
+    }
+    
+    public static void addFriend(UUID user, UUID friend) {
         HashSet<UUID> friends = friendMap.get(user);
         if (friends == null) {
             friendMap.put(user, new HashSet<>(Arrays.asList(friend)));
@@ -52,7 +65,7 @@ public class FriendUtil {
         }
     }
     
-    public void removeFriend(UUID user, UUID friend) {
+    public static void removeFriend(UUID user, UUID friend) {
         HashSet<UUID> friends = friendMap.get(user);
         if (friends != null) {
             friends.remove(friend);
@@ -63,7 +76,7 @@ public class FriendUtil {
         }
     }
     
-    public void loadFriends() {
+    public static void loadFriends() {
         try {
             String folder = Main.THIS.getDataFolder() + "";
             friendFile = new File(folder + File.separator + "friends.yml");
