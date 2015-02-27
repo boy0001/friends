@@ -2,9 +2,12 @@ package me.tkb7.friends;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 
@@ -46,6 +49,24 @@ public class FriendUtil {
             return new HashSet<UUID>();
         }
         return friends;
+    }
+    
+    public static void saveFriends() {
+        try {
+            if (!friendFile.exists()) {
+                friendFile.createNewFile();
+            }
+            for (Entry<UUID, HashSet<UUID>> entry : friendMap.entrySet()) {
+                List<String> friends = new ArrayList<String>();
+                for (UUID friend : entry.getValue()) {
+                    friends.add(friend.toString());
+                }
+            }
+        }
+        catch (IOException e) {
+            Main.log("FAILED TO LOAD FRIENDS FILE");
+            return;
+        }
     }
     
     public static void addFriend(UUID user, UUID friend) {

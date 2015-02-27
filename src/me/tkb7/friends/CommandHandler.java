@@ -1,5 +1,7 @@
 package me.tkb7.friends;
 
+import java.util.UUID;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -18,7 +20,8 @@ public class CommandHandler {
         switch (command) {
             case "add": {
             	if (args.length == 2) {
-            		
+            		String friend = args[1];
+            		UUID uuid = FriendUtil.getUUID(friend);
             	} else {
             		p.sendMessage(ChatColor.RED + "Incorrect Syntax use /Friends Help for help");
             	}
