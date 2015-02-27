@@ -1,7 +1,9 @@
 package me.tkb7.friends;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class CommandHandler {
 
@@ -11,22 +13,25 @@ public class CommandHandler {
             return false;
         }
         String command = args[0].toLowerCase();
+        Player p = (Player) sender;
         
         switch (command) {
             case "add": {
-                // do add command
+            	if (args.length == 2) {
+            		
+            	} else {
+            		p.sendMessage(ChatColor.RED + "Incorrect Syntax use /Friends Help for help");
+            	}
             }
-            case "list": {
-                // do list command
-            }
-            case "accept": {
-                
-            }
-            case "remove": {
-                // do remove command
+            case "help": {
+            	if (args.length == 2) {
+            		
+            	} else {
+            		p.sendMessage(ChatColor.RED + "Incorrect Syntax use /Friends Help for help");
+            	}
             }
             default: {
-                // unknown sub command entered by user
+                // list player's friends
             }
         }
         return false;
