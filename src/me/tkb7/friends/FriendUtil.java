@@ -27,6 +27,14 @@ public class FriendUtil {
         return null;
     }
     
+    public String getName(UUID uuid) {
+        OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
+        if (op.hasPlayedBefore()) {
+            return op.getName();
+        }
+        return null;
+    }
+    
     public void addFriend(UUID user, UUID friend) {
         HashSet<UUID> friends = friendMap.get(user);
         if (friends == null) {
