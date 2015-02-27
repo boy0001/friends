@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -16,6 +18,14 @@ public class FriendUtil {
     
     public static File friendFile;
     public static YamlConfiguration friendYml;
+    
+    public UUID getUUID(String name) {
+        OfflinePlayer op = Bukkit.getOfflinePlayer(name);
+        if (op.hasPlayedBefore()) {
+            return op.getUniqueId();
+        }
+        return null;
+    }
     
     public void addFriend(UUID user, UUID friend) {
         HashSet<UUID> friends = friendMap.get(user);
