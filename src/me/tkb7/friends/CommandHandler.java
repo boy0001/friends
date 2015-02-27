@@ -10,8 +10,6 @@ public class CommandHandler {
             // No sub command provided
             return false;
         }
-        
-        
         String command = args[0].toLowerCase();
         
         switch (command) {
@@ -20,6 +18,9 @@ public class CommandHandler {
             }
             case "list": {
                 // do list command
+            }
+            case "accept": {
+                
             }
             case "remove": {
                 // do remove command
