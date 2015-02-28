@@ -39,7 +39,11 @@ public class CommandHandler {
                         if (fp == null) {
                             p.sendMessage(ChatColor.RED + "Player not found");
                         }
-                        String pf = p.getName();
+                        Friendship friendship = new Friendship(p.getUniqueId(), fp.getUniqueId());
+                        if (FriendUtil.pendingFriendships.containsKey(friendship)) {
+                            p.sendMessage(ChatColor.RED + "There is already a pending friendship with this user");
+                        }
+                        FriendUtil.pendingFriendships.put(friendship, System.currentTimeMillis());
                         p.sendMessage(ChatColor.GREEN + "Friend request sent to " + friend);
                         JSONChatMessage message = new JSONChatMessage(p.getName() + " would like to be your friend", JSONChatColor.GOLD, null);
                         JSONChatExtra extra = new JSONChatExtra("<CLICK HERE TO ACCEPT>", JSONChatColor.GREEN, Arrays.asList(JSONChatFormat.BOLD));
