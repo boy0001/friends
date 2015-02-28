@@ -23,6 +23,10 @@ public class FriendUtil {
     public static File friendFile;
     public static YamlConfiguration friendYml;
     
+    public static HashMap<Friendship, Long> pendingFriendships = new HashMap<>();
+    
+    public static int cooldown = 60;
+    
     public static UUID getUUID(String name) {
         OfflinePlayer op = Bukkit.getOfflinePlayer(name);
         if (op.hasPlayedBefore()) {
