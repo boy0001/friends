@@ -25,7 +25,24 @@ public class FriendUtil {
     
     public static HashMap<Friendship, Long> pendingFriendships = new HashMap<>();
     
+    public static HashSet<Friendship> pvp = new HashSet<>();
+    
     public static int cooldown = 60;
+    
+    public static void unregister(UUID uuid) {
+        for (Friendship link : pendingFriendships.keySet()) {
+            if (link.user1.equals(uuid) || link.user2.equals(uuid)) {
+                pendingFriendships.remove(link);
+                return;
+            }
+        }
+        for (Friendship link : pvp) {
+            if (link.user1.equals(uuid) || link.user2.equals(uuid)) {
+                pvp.remove(link);
+                return;
+            }
+        }
+    }
     
     public static UUID getUUID(String name) {
         OfflinePlayer op = Bukkit.getOfflinePlayer(name);
